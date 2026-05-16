@@ -49,7 +49,7 @@ body{font-family:'Pretendard','Malgun Gothic','Apple SD Gothic Neo',-apple-syste
 }
 
 #searchArea{display:none}
-#emptyMessage{display:none;text-align:center;padding:50px;font-size:18px;color:#555;background:#fff;border-radius:12px;border:1px solid #ddd}
+#emptyMessage{display:none;text-align:center;padding:32 20px;font-size:14px;color:#555;background:#fff;border-radius:12px;border:1px solid #ddd}
 
 /* 안내문 */
 .notice-box{background:#fff;border:1px solid #eaeaea;padding:18px;border-radius:10px;font-size:14px;margin-bottom:20px;box-shadow:0 2px 4px rgba(0,0,0,.02)}
@@ -90,13 +90,9 @@ body{font-family:'Pretendard','Malgun Gothic','Apple SD Gothic Neo',-apple-syste
   box-shadow:0 2px 6px rgba(0,0,0,.06);
   font-family:inherit;
   background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2393c5fd' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cline x1='16.65' y1='16.65' x2='21' y2='21'/%3E%3C/svg%3E") no-repeat 16px center,
     linear-gradient(#fff,#fff) padding-box,
     linear-gradient(90deg,#e0f2fe,#60a5fa,#2563eb) border-box;
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2393c5fd' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cline x1='16.65' y1='16.65' x2='21' y2='21'/%3E%3C/svg%3E"),
-    linear-gradient(#fff,#fff), linear-gradient(90deg,#e0f2fe,#60a5fa,#2563eb);
-  background-repeat:no-repeat,no-repeat,no-repeat;
-  background-position:16px center, padding-box, border-box;
   background-size:18px 18px, auto, auto;
 }
 .search-input::placeholder{color:#94a3b8}
@@ -256,24 +252,24 @@ mark.hit{
 
       <!-- 공공기관 링크는 수시 변경 가능하므로 정기 확인 -->
       <div class="notice-line">
-        - 통·반 확인 → 관할 행정복지센터
+        - 통·반 정보는 관할 행정복지센터에서 확인해 주세요.
         <a href="https://www.chungju.go.kr/town/" target="_blank" rel="noopener noreferrer">충주시 통합읍면동 ↗</a>
       </div>
 
       <div class="notice-line">
-        - 도로명 주소로 세부 주소 확인 →
+        - 세부 주소는 도로명주소 안내시스템을 이용해 주세요.
         <a href="https://www.juso.go.kr/" target="_blank" rel="noopener noreferrer">도로명주소 안내시스템 ↗</a>
       </div>
 
       <div class="notice-line">
-        - 통학구역 원본 자료 확인 →
+        - 현 페이지의 원본 학구자료는 충주교육지원청 홈페이지를 참고해 주세요.
         <a href="https://www.cbchje.go.kr:447/cbchje/sub.php?menukey=1248" target="_blank" rel="noopener noreferrer">충주교육지원청 분야별 정보안내 ↗</a>
       </div>
 
       <div class="notice-line">
-        - 학구 지도 확인 →
+        - 학구도는 참고용입니다.
         <a href="https://schoolzone.emac.kr/" target="_blank" rel="noopener noreferrer">학구도안내서비스 ↗</a>
-        <br><span class="notice-sub">※ 학구도는 현행 학구 정보 반영이 지체될 수 있습니다.</span>
+        <span class="notice-sub">※ 현행 학구 정보가 지도에 늦게 반영될 수 있습니다.</span>
       </div>
 
       <div class="notice-divider" aria-hidden="true"></div>
@@ -298,7 +294,7 @@ mark.hit{
     <button class="search-clear" id="clearBtn" onclick="clearSearch()" aria-label="검색어 지우기">✕</button>
     <div class="ac-dropdown" id="acDropdown" role="listbox"></div>
     <div class="search-hint">
-      예: 성서동 · 만정리 · 3통 5반 · 센트럴푸르지오 · 칠금초<br>
+      예: 성서동  만정리  3통 5반  센트럴푸르지오  칠금초<br>
       ※ 두 단어 이상 입력 시 띄어쓰기로 구분
     </div>
   </div>
