@@ -47,7 +47,6 @@ body{font-family:'Pretendard','Malgun Gothic','Apple SD Gothic Neo',-apple-syste
   color:#fff;
   box-shadow:0 4px 10px rgba(0,70,160,.2);
 }
-</style>
 
 #searchArea{display:none}
 #emptyMessage{display:none;text-align:center;padding:50px;font-size:18px;color:#555;background:#fff;border-radius:12px;border:1px solid #ddd}
@@ -212,7 +211,6 @@ mark.hit{
     .notice-divider{margin:10px 0}
     .legend-badge{font-size:10px;padding:2px 7px}
   }
-
 </style>
 </head>
 <body>
