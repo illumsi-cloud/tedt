@@ -238,7 +238,7 @@ mark.hit{
               안내문 접기
           </button>
 
-          <div class="notice-box" id="noticeContent" hidden style="word-break:keep-all;word-wrap:break-word">
+          <div class="notice-box" id="noticeContent" style="word-break:keep-all;word-wrap:break-word">
             <div class="notice-line">동·리, 통·반, 아파트명, 학교명으로 배정될 학교를 확인해보세요.</div>
 
             <!-- 공공기관 링크는 수시 변경 가능하므로 정기 확인 -->
@@ -283,7 +283,7 @@ mark.hit{
             placeholder="동·리, 통·반, 아파트, 학교명 입력"
             autocomplete="off" role="combobox" aria-expanded="false"
             aria-autocomplete="list" aria-controls="acDropdown">
-          <button class="search-clear" id="clearBtn" onclick="clearSearch()" aria-label="검색어 지우기">✕</button>
+          <button class="search-clear" id="clearBtn" onclick="clearSearch()" aria-label="검색어 지우기">&#x232B;</button>
           <div class="ac-dropdown" id="acDropdown" role="listbox"></div>
           <div class="search-hint">
             예: 성서동  만정리  3통 5반  센트럴푸르지오  칠금초<br>
@@ -621,12 +621,16 @@ function initNoticeToggle(){
   const content = document.getElementById('noticeContent');
   if(!btn || !content || btn.dataset.bound === '1') return;
 
+  content.hidden = false;
+  btn.textContent = '안내문 접기';
+  btn.setAttribute('aria-expanded', 'true');
+
   btn.dataset.bound = '1';
   btn.addEventListener('click', ()=>{
     const hidden = content.hidden;
     content.hidden = !hidden;
     btn.textContent = hidden ? '안내문 접기' : '안내문 펼치기';
-    btn.setAttribute('aria-expanded', String(hidden));
+    btn.setAttribute('aria-expanded', String(!hidden));
   });
 }
 
