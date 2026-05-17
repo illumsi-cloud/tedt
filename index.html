@@ -19,24 +19,6 @@ body{font-family:'Pretendard','Malgun Gothic','Apple SD Gothic Neo',-apple-syste
 @keyframes spin{to{transform:rotate(360deg)}}
 .loading-text{color:#4b5563;font-size:15px;font-weight:500}
 
-/* 관리자 화면 */
-#adminView{background:#fff;padding:40px;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,.05);border-top:5px solid #0046a0}
-.admin-header{text-align:center;margin-bottom:30px;border-bottom:2px solid #eee;padding-bottom:20px}
-.admin-header h2{color:#2c3e50;margin:0;font-size:24px}
-.admin-controls{background:#f8f9fa;padding:25px;border-radius:8px;text-align:center}
-.control-group{display:flex;justify-content:center;align-items:center;gap:10px;margin-bottom:15px;flex-wrap:wrap}
-.year-select{padding:10px 15px;font-size:15px;border-radius:6px;border:1px solid #0046a0;color:#0046a0;font-weight:bold;outline:none}
-.file-input{border:1px solid #ddd;padding:8px 12px;border-radius:6px;background:#fff;cursor:pointer;font-size:14px}
-.guide-box{background:#fff;border:1px solid #ddd;padding:15px;border-radius:8px;margin-top:20px;font-size:13.5px;color:#444;line-height:1.6;text-align:left;display:inline-block;max-width:620px}
-.upload-status{margin-top:25px;padding:20px;border-radius:8px;background:#eef2f7;font-size:15px}
-.upload-status ul{margin:8px 0 0 0;padding-left:20px}
-.upload-status li{margin:4px 0}
-.btn-launch{display:block;width:100%;padding:15px;background:#0046a0;color:#fff;font-size:18px;font-weight:bold;text-align:center;border:none;border-radius:8px;cursor:pointer;margin-top:30px}
-.btn-launch:hover{background:#003380}
-.status-msg{padding:10px;border-radius:6px;margin:10px 0;font-size:14px}
-.status-msg.ok{background:#d1fae5;color:#065f46}
-.status-msg.err{background:#fee2e2;color:#991b1b}
-
 /* 사용자 화면 */
 #userView{display:none}
 .header-title{text-align:center;color:#0046a0;margin-bottom:20px;font-size:20px;font-weight:700;letter-spacing:-.5px;word-break:keep-all}
@@ -47,9 +29,16 @@ body{font-family:'Pretendard','Malgun Gothic','Apple SD Gothic Neo',-apple-syste
   color:#fff;
   box-shadow:0 4px 10px rgba(0,70,160,.2);
 }
+.year-note{
+  margin-top:8px;
+  text-align:center;
+  font-size:12px;
+  color:#64748b;
+  line-height:1.4;
+}
 
 #searchArea{display:none}
-#emptyMessage{display:none;text-align:center;padding:32 20px;font-size:14px;color:#555;background:#fff;border-radius:12px;border:1px solid #ddd}
+#emptyMessage{display:none;text-align:center;padding:32px 20px;font-size:14px;color:#555;background:#fff;border-radius:12px;border:1px solid #ddd}
 
 /* 안내문 */
 .notice-box{background:#fff;border:1px solid #eaeaea;padding:18px;border-radius:10px;font-size:14px;margin-bottom:20px;box-shadow:0 2px 4px rgba(0,0,0,.02)}
@@ -104,6 +93,17 @@ body{font-family:'Pretendard','Malgun Gothic','Apple SD Gothic Neo',-apple-syste
   line-height:1.45;
   padding-left:4px;
 }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 
 mark.hit{
   background:linear-gradient(180deg, rgba(168,85,247,.30), rgba(236,72,153,.35));
@@ -126,7 +126,14 @@ mark.hit{
 .ac-item{padding:11px 16px;cursor:pointer;font-size:15px;display:flex;align-items:center;gap:9px;border-bottom:1px solid #f5f5f5;transition:background .1s}
 .ac-item:hover,.ac-item.focused{background:#e8f0fe;color:#0046a0}
 .ac-item .icon{font-size:16px;flex-shrink:0}
-.ac-item mark{background:#fff3a3;font-weight:700;padding:0 2px;border-radius:2px}
+.ac-item mark,
+mark.hit{
+  background: rgba(255, 246, 143, 0.62);
+  color: inherit;
+  font-weight: 700;
+  padding: 0 2px;
+  border-radius: 2px;
+}
 
 /* 결과 요약 */
 .result-summary{margin-bottom:12px;color:#4b5563;font-size:14px;font-weight:500}
@@ -173,11 +180,11 @@ mark.hit{
 .mid-tags-row{padding:8px 14px;border-top:1px solid #f0f4f8;display:flex;flex-wrap:wrap;gap:5px;background:#fafcff}
 
 mark.hit{
-  background:linear-gradient(180deg, rgba(168,85,247,.30), rgba(236,72,153,.35));
-  color:#6d28d9;
-  font-weight:700;
-  padding:0 1px;
-  border-radius:2px;
+  background: rgba(255, 246, 143, 0.62);
+  color: inherit;
+  font-weight: 700;
+  padding: 0 2px;
+  border-radius: 2px;
 }
 
 /* 빈 결과 */
@@ -194,6 +201,7 @@ mark.hit{
   @media (max-width:600px){
     .header-title{font-size:18px}
     .year-tab{padding:7px 16px;font-size:13px}
+    .year-note{font-size:11px;margin-top:6px}
     .search-input{font-size:16px}
     .card-top{flex-direction:column}
     .school-box.mid-box{border-left:none;border-top:1px solid #d1e8ff}
@@ -212,100 +220,83 @@ mark.hit{
 <body>
 <div class="container">
 
-  <div id="loadingView">
-    <div class="spinner"></div>
-    <div class="loading-text">통학구역 데이터를 불러오는 중입니다…</div>
-  </div>
-
-  <div id="adminView" style="display:none">
-    <div class="admin-header"><h2>⚙️ 시스템 웹마스터 설정 패널</h2></div>
-    <div class="admin-controls">
-      <div class="control-group">
-        <select id="adminYearSelect" class="year-select"></select>
-        <input type="file" id="fileInput" class="file-input" accept=".csv">
-      </div>
-      <div class="guide-box">
-        <strong style="color:#0046a0">💡 운영 가이드</strong><br>
-        1. 파일의 형식은 <span style="font-weight:bold;color:#d93025">년도.csv (예: 2026.csv)</span>로 통일해 주세요.<br>
-        2. CSV 파일이 없을 경우 관리자 화면이 표시되며, 파일을 업로드하면 사용자 화면이 열립니다.
-      </div>
-      <div id="adminStatus"></div>
+    <div id="loadingView">
+      <div class="spinner"></div>      
+      <div class="loading-text">통학구역 데이터를 불러오는 중입니다…</div>
     </div>
-    <div class="upload-status"><strong>📺 사용자 화면 현황</strong><ul id="uploadedList"></ul></div>
-    <button class="btn-launch" onclick="launchService()">사용자 검색 페이지 열기 ➔</button>
-  </div>
 
-  <div id="userView">
-    <h2 class="header-title">충주시 초등학교 통학구역 및 중학구 검색</h2>
-    <div class="year-tabs" id="tabContainer"></div>
+    <div id="userView">
+      <h2 class="header-title">충주시 초등학교 통학구역 및 중학구 검색</h2>
+      <div class="year-tabs" id="tabContainer"></div>
+      <div class="year-note">※ 학년도는 3월부터 다음 해 2월까지입니다.</div>
 
-    <div id="emptyMessage"><span id="emptyText"></span></div>
+      <div id="emptyMessage"><span id="emptyText"></span></div>
 
-<div id="searchArea">
-  <div class="notice-wrap">
-    <button type="button" class="notice-toggle" id="noticeToggle" aria-expanded="true" aria-controls="noticeContent">
-      안내문 접기
-    </button>
+      <div id="searchArea">
+        <div class="notice-wrap">
+          <button type="button" class="notice-toggle" id="noticeToggle" aria-expanded="true" aria-controls="noticeContent">
+              안내문 접기
+          </button>
 
-    <div class="notice-box" id="noticeContent" style="word-break:keep-all;word-wrap:break-word">
-      <div class="notice-line">동·리, 통·반, 아파트명, 학교명으로 배정될 학교를 확인해보세요.</div>
+          <div class="notice-box" id="noticeContent" hidden style="word-break:keep-all;word-wrap:break-word">
+            <div class="notice-line">동·리, 통·반, 아파트명, 학교명으로 배정될 학교를 확인해보세요.</div>
 
-      <!-- 공공기관 링크는 수시 변경 가능하므로 정기 확인 -->
-      <div class="notice-line">
-        - 통·반 정보는 관할 행정복지센터에서 확인해 주세요.
-        <a href="https://www.chungju.go.kr/town/" target="_blank" rel="noopener noreferrer">충주시 통합읍면동 ↗</a>
+            <!-- 공공기관 링크는 수시 변경 가능하므로 정기 확인 -->
+            <div class="notice-line">
+                - 통·반 정보는 관할 행정복지센터에서 확인해 주세요.
+                <a href="https://www.chungju.go.kr/town/" target="_blank" rel="noopener noreferrer">충주시 통합읍면동 ↗</a>
+            </div>
+
+            <div class="notice-line">
+                - 세부 주소는 도로명주소 안내시스템을 이용해 주세요.
+                <a href="https://www.juso.go.kr/" target="_blank" rel="noopener noreferrer">도로명주소 안내시스템 ↗</a>
+            </div>
+
+            <div class="notice-line">
+                - 이 페이지는 충주교육지원청 학구 변경 고시 자료를 기반으로 합니다. 고시 내용과 다를 경우 
+                <a href="https://www.cbchje.go.kr:447/cbchje/sub.php?menukey=1248" target="_blank" rel="noopener noreferrer">충주교육지원청 ↗</a>에 문의해 주세요.
+            </div>
+
+            <div class="notice-line">
+                - 학구도는 참고용입니다.
+                <a href="https://schoolzone.emac.kr/" target="_blank" rel="noopener noreferrer">학구도안내서비스 ↗</a>
+                <span class="notice-sub">※ 현행 학구 정보가 지도에 늦게 반영될 수 있습니다.</span>
+            </div>
+
+            <div class="notice-divider" aria-hidden="true"></div>
+
+            <div class="notice-line"><strong>범례</strong></div>
+
+            <div class="notice-line">
+                <span class="legend-badge legend-joint">🚌 공동학구</span> 공동학구 내 학교 모두 지원 가능
+            </div>
+
+            <div class="notice-line">
+                <span class="legend-badge legend-way">🌳 공동(일방)학구</span> 지정 큰학교에서 작은학교로만 전입 가능
+            </div>
+        </div>
       </div>
 
-      <div class="notice-line">
-        - 세부 주소는 도로명주소 안내시스템을 이용해 주세요.
-        <a href="https://www.juso.go.kr/" target="_blank" rel="noopener noreferrer">도로명주소 안내시스템 ↗</a>
+      <div class="search-wrap" id="searchWrap">
+          <label for="searchInput" class="sr-only">통학구역 검색</label>
+          <input type="text" id="searchInput" class="search-input"
+            placeholder="동·리, 통·반, 아파트, 학교명 입력"
+            autocomplete="off" role="combobox" aria-expanded="false"
+            aria-autocomplete="list" aria-controls="acDropdown">
+          <button class="search-clear" id="clearBtn" onclick="clearSearch()" aria-label="검색어 지우기">✕</button>
+          <div class="ac-dropdown" id="acDropdown" role="listbox"></div>
+          <div class="search-hint">
+            예: 성서동  만정리  3통 5반  센트럴푸르지오  칠금초<br>
+            ※ 두 단어 이상 입력 시 띄어쓰기로 구분
+          </div>
+        </div>
+
+        <div class="result-summary" id="resultSummary"></div>
+        <div id="results"></div>
       </div>
-
-      <div class="notice-line">
-        - 현 페이지의 원본 학구자료는 충주교육지원청 홈페이지를 참고해 주세요.
-        <a href="https://www.cbchje.go.kr:447/cbchje/sub.php?menukey=1248" target="_blank" rel="noopener noreferrer">충주교육지원청 분야별 정보안내 ↗</a>
-      </div>
-
-      <div class="notice-line">
-        - 학구도는 참고용입니다.
-        <a href="https://schoolzone.emac.kr/" target="_blank" rel="noopener noreferrer">학구도안내서비스 ↗</a>
-        <span class="notice-sub">※ 현행 학구 정보가 지도에 늦게 반영될 수 있습니다.</span>
-      </div>
-
-      <div class="notice-divider" aria-hidden="true"></div>
-
-      <div class="notice-line"><strong>범례</strong></div>
-
-      <div class="notice-line">
-        <span class="legend-badge legend-joint">🚌 공동학구</span> 공동학구 내 학교 모두 지원 가능
-      </div>
-
-      <div class="notice-line">
-        <span class="legend-badge legend-way">🌳 공동(일방)학구</span> 지정 큰학교에서 작은학교로만 전입 가능
-      </div>
-    </div>
-  </div>
-
-  <div class="search-wrap" id="searchWrap">
-    <input type="text" id="searchInput" class="search-input"
-      placeholder="동·리, 통·반, 아파트, 학교명 입력"
-      autocomplete="off" role="combobox" aria-expanded="false"
-      aria-autocomplete="list" aria-controls="acDropdown">
-    <button class="search-clear" id="clearBtn" onclick="clearSearch()" aria-label="검색어 지우기">✕</button>
-    <div class="ac-dropdown" id="acDropdown" role="listbox"></div>
-    <div class="search-hint">
-      예: 성서동  만정리  3통 5반  센트럴푸르지오  칠금초<br>
-      ※ 두 단어 이상 입력 시 띄어쓰기로 구분
     </div>
   </div>
-
-  <div class="result-summary" id="resultSummary"></div>
-  <div id="results"></div>
-</div>
-
-<div class="footer-text">
-  <button class="btn-admin-return" onclick="returnToAdmin()">관리자 화면</button>
-</div>
+</body>
 
 <script>
 /* 전역 상태 */
@@ -371,35 +362,6 @@ function lev(a,b){
   return dp[m][n];
 }
 
-/* 관리자 기능 */
-function setAdminStatus(msg, ok){
-  const el = document.getElementById('adminStatus');
-  el.replaceChildren();
-  const box = document.createElement('div');
-  box.className = ok ? 'status-msg ok' : 'status-msg err';
-  box.textContent = msg;
-  el.appendChild(box);
-  setTimeout(()=>{ el.replaceChildren(); }, 4000);
-}
-
-function updateStatusUI(){
-  const listUi = document.getElementById('uploadedList');
-  listUi.replaceChildren();
-  const y = new Date().getFullYear();
-  
-  [String(y), String(y + 1)].forEach(year=>{
-    const li = document.createElement('li');
-    if (STATE.database[year]) {
-      li.textContent = `✅ ${year}학년도 데이터 탑재됨 (${STATE.database[year].length}행)`;
-      li.style.color = '#0046a0';
-      li.style.fontWeight = 'bold';
-    } else {
-      li.textContent = `⏳ ${year}학년도 안내문 표출 중`;
-      li.style.fontWeight = 'bold';
-    }
-    listUi.appendChild(li);
-  });
-}
 
 /* 1. 자체 내장 CSV 파서 */
 function parseCSV(text) {
@@ -451,34 +413,14 @@ function parseCSV(text) {
   return data;
 }
 
-function initAdminYearSelect(){
-  const select = document.getElementById('adminYearSelect');
-  if(!select) return;
-
-  const y = new Date().getFullYear();
-  select.replaceChildren();
-
-  [y, y + 1].forEach(year => {
-    const option = document.createElement('option');
-    option.value = String(year);
-    option.textContent = year + '학년도';
-    select.appendChild(option);
-  });
-
-  select.value = String(y);
-}
 
 /* 2. 서버 업로드 파일 자동 탐지 및 로드 (Fetch API) */
 window.onload = async function() {
   const loadingView = document.getElementById('loadingView');
-  const adminView   = document.getElementById('adminView');
   const today = new Date();
   const y = today.getFullYear();
   
-  initAdminYearSelect();
-  
   const yearsToTry = [y, y + 1]; 
-  let loadedAny = false;
 
   for (const year of yearsToTry) {
     try {
@@ -492,48 +434,18 @@ window.onload = async function() {
         }
         
         STATE.database[String(year)] = parseCSV(text);
-        loadedAny = true;
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error(`${year}.csv 로드 실패:`, error);
+    }
   }
 
-  loadingView.style.display = 'none';   
-
-  if (loadedAny) {
-    document.getElementById('userView').style.display = 'block';
-    switchYear(STATE.database[String(y)] ? String(y) : String(y + 1));
-  } else {
-    adminView.style.display = 'block';
-    const adminStatus = document.getElementById('adminStatus');
-    adminStatus.replaceChildren();
-    const errBox = document.createElement('div');
-    errBox.className = 'status-msg err';
-    errBox.textContent = '서버에 등록된 통학구역 데이터 파일(CSV)이 없습니다. 전산 담당자에게 데이터 업로드를 요청해 주세요.';
-    adminStatus.appendChild(errBox);
-    updateStatusUI();
-  }
-
-initNoticeToggle();  
-};
-
-/* 3. 데이터 화면 갱신 */
-function processParsedData(data, selectedYear) {
-  STATE.database[selectedYear] = data;
-  updateStatusUI();
-  setAdminStatus('✅ ' + selectedYear + '학년도 데이터 탑재 완료 (' + data.length + '행)', true);
-}
-
-function launchService(){
-  const y = new Date().getFullYear();
-  document.getElementById('adminView').style.display = 'none';
+  loadingView.style.display = 'none';
   document.getElementById('userView').style.display = 'block';
   switchYear(STATE.database[String(y)] ? String(y) : String(y + 1));
-}
 
-function returnToAdmin(){
-  document.getElementById('userView').style.display = 'none';
-  document.getElementById('adminView').style.display = 'block';
-}
+  initNoticeToggle();  
+};
 
 /* 사용자 화면 - 연도 탭 */
 function switchYear(year){
@@ -819,7 +731,9 @@ function renderResults(results){
     return;
   }
 
-  summaryDiv.textContent = results.length + '건의 결과가 있습니다.';
+  summaryDiv.textContent = results.length > 500
+    ? results.length + '건 중 500건만 표시됩니다. 검색어를 더 구체적으로(예: "연수동 리슈빌") 입력해 주세요.'
+    : results.length + '건의 결과가 있습니다.';
   summaryDiv.style.fontWeight = 'bold';
 
   let html = '';
@@ -835,7 +749,7 @@ function renderCard(r){
   const midLabel = isChu
     ? hl('충주시학교군') + '<span class="s-sub">(추첨배정)</span>'
     : hl(mid.replace(/중학구$/,'중학교'));
-  const midSub = isChu ? '<div class="mid-target">대상: ' + hl(STATE.dynamicMiddleList) + '</div>' : '';
+  const midSub = isChu ? '<div class="mid-target">대상: ' + esc(STATE.dynamicMiddleList) + '</div>' : '';
 
   const mJoint = getField(r,['중학교 공동학구','중 공동학구']);
   const mWay   = getField(r,['중학교 공동(일방)학구','중학교 공동일방학구','중 공동일방학구']);
@@ -922,41 +836,7 @@ document.addEventListener('click', function(e){
   if(!document.getElementById('searchWrap').contains(e.target)) hideAC();
 });
 
-document.getElementById('fileInput').addEventListener('change', function(e) {
-  const file = e.target.files[0];
-  if (!file) return;
 
-  const year = document.getElementById('adminYearSelect').value;
-  const reader = new FileReader();
-
-  reader.onload = function(ev) {
-    const buffer = ev.target.result;
-    let text = new TextDecoder('utf-8').decode(buffer);
-
-    if (text.includes('\uFFFD')) {
-      try {
-        text = new TextDecoder('euc-kr').decode(buffer);
-      } catch (err) {}
-    }
-
-    const data = parseCSV(text);
-
-    if (data && data.length > 0) {
-      processParsedData(data, year);
-    } else {
-      setAdminStatus('파일 형식이 올바르지 않거나 데이터가 없습니다.', false);
-    }
-
-    e.target.value = '';
-  };
-
-  reader.onerror = function() {
-    setAdminStatus('파일을 읽는 중 오류가 발생했습니다.', false);
-    e.target.value = '';
-  };
-
-  reader.readAsArrayBuffer(file);
-});
 </script>
 </body>
 </html>
